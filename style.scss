@@ -1,0 +1,86 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Courier New', Courier, monospace;
+    overflow-x: hidden;
+}
+
+h1 {
+    font-size: 3em;
+}
+
+.hero {
+    width: 100vw;
+    height: 100vh;
+    background-color: #FCD500;
+}
+
+.container {
+    max-width: 80%;
+    margin: auto;
+}
+
+nav {
+    display: flex;
+    justify-content: flex-end;
+    padding: 10px;
+    width: 100%;
+
+    ul {
+        display: flex;
+        li {
+            list-style-type: none;
+            margin-right: 0.5em;
+        }
+    }    
+}
+$clouds: (1: 40%, 2: 75%, 3: 65%, 4: 50%);
+
+.clouds { 
+    position: relative;
+    height: 80vh;
+    z-index: 1;
+
+    img {
+        position: absolute;
+        @each $cloudNumber, $cloudPosition in $clouds {
+            &:nth-child(#{$cloudNumber}) {
+                top: calc(100% - #{$cloudPosition});
+                left: $cloudPosition;
+                animation-name: clouds;
+                animation-duration: calc(20s + #{random(10)}s);
+                animation-timing-function: ease-in-out;
+                animation-iteration-count: infinite;
+                animation-fill-mode: both;
+            }
+        }
+
+    }
+}
+
+@keyframes clouds {
+    0% {
+        opacity: 0.5;
+    }
+    5% {
+        opacity: 1;
+    }
+    95% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+        left: 0;
+    }
+
+}
+
+.hero-title {
+    position: absolute;
+    top: 25%;
+    z-index: 2;
+}
